@@ -30,7 +30,7 @@ public class NotizenApplication extends Application
         stage.show();
 
    //     var test = new SaveManager();
- //       test.SaveConfigs();
+   //     test.SaveConfigs();
    //     var temp = test.Load();
 
     }

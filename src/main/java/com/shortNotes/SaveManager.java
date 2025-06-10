@@ -11,17 +11,17 @@ import java.io.IOException;
 
 public class SaveManager
 {
-    private static final String CONFIG_FILE_NAME = "config.json";
+    private final String CONFIG_FILE_NAME = "config.json";
 
-    private WindowConfig mainDefaultWindow;
-    private WindowConfig noteDefaultWindow;
+    private final WindowConfig mainDefaultWindow;
+    public static  final WindowConfig NOTE_DEFAULT_WINDOW = new WindowConfig(200, 200, -1, -1, false);
+
 
     private final String jsonArrayString;
 
     public SaveManager()
     {
         this.mainDefaultWindow = new WindowConfig(300, 500, -1, -1, false);
-        this.noteDefaultWindow = new WindowConfig(200, 200, -1, -1, false);
 
         jsonArrayString = """
                 [
@@ -50,7 +50,7 @@ public class SaveManager
                 """;
     }
 
-    public SaveData Load()
+    public SaveData LoadData()
     {
         Gson gson = new Gson();
 
@@ -65,17 +65,17 @@ public class SaveManager
 
         } catch (IOException e)
         {
-            System.err.println("Fehler beim Laden der Daten: " + e.getMessage());
-            e.printStackTrace();
-            return null; // Im Fehlerfall null zurückgeben
+            System.err.println("Error loading the data: " + e.getMessage() + ". Using default data.");
+
+            return new SaveData(mainDefaultWindow);
         }
     }
 
-    public void SaveConfigs(SaveData saveData)
+    public void SaveData(SaveData saveData)
     {
         if (saveData == null)
         {
-            System.err.println("No SAveData receive");
+            System.err.println("No SaveData receive");
             return;
         }
 

@@ -12,5 +12,6 @@
       spacing="10.0"
       styleClass="note-box"
       VBox.vgrow="ALWAYS">
+    <Label fx:id="noteTitle" text="Dies ist eine Notiz"/>
     <Label fx:id="contentLabel" text="Dies ist eine Notiz"/>
 </VBox>

@@ -2,6 +2,8 @@ package com.shortNotes;
 
 import javafx.fxml.FXML;
 
+import java.util.ArrayList;
+
 public class MainViewController
 {
     @FXML
@@ -19,4 +21,5 @@ public class MainViewController
             titleBarController.setNotesMainViewController(notesMainViewController);
         }
     }
+
 }

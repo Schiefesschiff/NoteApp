@@ -9,13 +9,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class NotesMainViewController
 {
     private int NoteCounter;
 
-    @FXML
-    public VBox rootBox;
     @FXML
     private GridPane notesMainView;
 
@@ -35,12 +34,14 @@ public class NotesMainViewController
         });
     }
 
-    public void addNote()
+    public void addNote(NoteSave note)
     {
         try
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("NoteItem.fxml"));
             VBox noteBox = loader.load();
+            NoteItemController noteItemController = loader.getController();
+            noteItemController.setData(note);
 
             notesMainView.add(noteBox, 0, 0);
             NoteCounter++;
@@ -50,6 +51,18 @@ public class NotesMainViewController
         {
             e.printStackTrace();
         }
+    }
+
+    public void addNote()
+    {
+        var temp = new NoteSave(SaveManager.NOTE_DEFAULT_WINDOW, "New Note", "Number " + (NoteCounter+1));
+
+        addNote(temp);
+    }
+
+    public void removeNote()
+    {
+
     }
 
     private void setAllNotePositions()
@@ -66,7 +79,6 @@ public class NotesMainViewController
 
     private void setNotePosition(int noteIndex, Node note)
     {
-
         if (!notesMainView.getChildren().isEmpty())
         {
             Node firstNote = notesMainView.getChildren().get(0);
