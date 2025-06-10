@@ -1,0 +1,46 @@
+.my-button {
+    -fx-background-color: lightyellow;
+    -fx-border-color: gray;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+
+.my-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: darkblue;
+}
+
+.note-box {
+    -fx-padding: 10;
+    -fx-border-color: gray;
+    -fx-background-color: lightyellow;
+
+    /* Flexible size */
+    -fx-min-width: 100px;
+    -fx-max-width: 250px;
+    -fx-pref-width: 150px;
+
+    -fx-min-height: 100px;
+    -fx-max-height: 200px;
+    -fx-pref-height: 150px;
+
+    /* Debug */
+    -fx-border-color: red;
+    -fx-border-width: 1;
+}
+
+
+  /*   scrollbar invisible   */
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-opacity: 1;
+    -fx-pref-width: 0;
+    -fx-min-width: 0;
+    -fx-max-width: 0;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .viewport {
+    -fx-padding: 0;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:id="noteBox"
+      fx:controller="com.shortNotes.NoteItemController"
+      spacing="10.0"
+      styleClass="note-box"
+      VBox.vgrow="ALWAYS">
+    <Label fx:id="contentLabel" text="Dies ist eine Notiz"/>
+</VBox>
