@@ -71,17 +71,19 @@ public class SaveManager
         }
     }
 
-    public void SaveConfigs()
+    public void SaveConfigs(SaveData saveData)
     {
-        var configs = new SaveData(mainDefaultWindow);
-        configs.NotesSaves.add(new NoteSave(noteDefaultWindow, "Test", "Test"));
-
+        if (saveData == null)
+        {
+            System.err.println("No SAveData receive");
+            return;
+        }
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try (FileWriter writer = new FileWriter(CONFIG_FILE_NAME))
         {
-            gson.toJson(configs, writer);
+            gson.toJson(saveData, writer);
             System.out.println("Daten erfolgreich in " + CONFIG_FILE_NAME + " gespeichert.");
         } catch (IOException e)
         {
