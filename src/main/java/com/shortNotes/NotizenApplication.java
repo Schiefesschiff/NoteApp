@@ -28,6 +28,11 @@ public class NotizenApplication extends Application
         new WindowsResizer(stage, scene);
 
         stage.show();
+
+        var test = new SaveManager();
+        test.SaveConfigs();
+        var temp = test.Load();
+
     }
 
     public static void main(String[] args)
