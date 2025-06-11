@@ -19,6 +19,7 @@ public class NotizenApplication extends Application
 
         Scene scene = new Scene(root, 320, 240);
         scene.getStylesheets().add(getClass().getResource("/com/shortNotes/style.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/com/shortNotes/TextAreaStyle.css").toExternalForm());
         stage.setTitle("Notizen");
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);

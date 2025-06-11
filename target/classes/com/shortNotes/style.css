@@ -11,7 +11,7 @@
 }
 
 .note-box {
-    -fx-padding: 10;
+    -fx-padding: 1;
     -fx-border-color: gray;
     -fx-background-color: lightyellow;
 

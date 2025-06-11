@@ -1,0 +1,99 @@
+/* Deine_CSS_Datei.css */
+
+/* ... (Deine bestehenden Regeln von vorher, die jetzt für Rahmen und Fokus funktionieren) ... */
+
+/* >>> WICHTIG: Prüfe diese Hauptregel für den Hintergrund des TextArea selbst <<< */
+.note-item-textarea {
+    -fx-background-color: transparent !important; /* MUSS TRANSPARENT SEIN */
+    -fx-border-color: transparent !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-text-box-border: transparent !important;
+    -fx-wrap-text: false;
+  /*  -fx-pref-height: 50; */
+    /* -fx-text-fill: black; */
+}
+
+/* >>> DIESER ABSCHNITT IST OFT DER SCHULDIGE FÜR DEN WEISSEN HINTERGRUND <<< */
+/* Der interne Content-Bereich, wo der Text wirklich sitzt */
+.note-item-textarea .content {
+    -fx-background-color: transparent !important; /* Das ist oft der hartnäckige Hintergrund! */
+    -fx-background-insets: 0 !important; /* Entfernt jegliche "Einrückungen" des Hintergrunds */
+    -fx-background-radius: 0 !important; /* Entfernt mögliche abgerundete Ecken des Hintergrunds */
+    -fx-border-color: transparent !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-text-box-border: transparent !important;
+    -fx-padding: 0px !important;
+}
+
+/* Der ScrollPane, der den Content umschließt */
+.note-item-textarea .scroll-pane {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+/* Die interne Schicht, die den Text selbst rendert (könnte auch einen Hintergrund haben) */
+.note-item-textarea .text-input {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+/* Wenn das TextArea den Fokus hat (wir wissen, dass das funktioniert, aber zur Sicherheit) */
+.note-item-textarea:focused {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-effect: none !important;
+}
+
+/* Der Content-Bereich, wenn das TextArea fokussiert ist */
+.note-item-textarea:focused .content {
+    -fx-background-color: transparent !important; /* Das ist oft der hartnäckige Hintergrund! */
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-text-box-border: transparent !important;
+}
+
+/* Text-Input bei Fokus */
+.note-item-textarea:focused .text-input {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+}
+
+/* Und falls es eine blaue Linie/Schlagschatten des Textes selbst ist: */
+.note-item-textarea .text {
+    -fx-stroke: transparent !important;
+    -fx-fill: inherit !important;
+}
+
+/* Optional: Scrollbalken komplett unsichtbar machen */
+.note-item-textarea .scroll-bar:vertical,
+.note-item-textarea .scroll-bar:horizontal {
+    -fx-opacity: 0 !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+}
+
+
+
+.note-item-textarea .scroll-pane .viewport {
+    -fx-background-color: transparent !important;
+}
+
+.note-item-textarea:focused .scroll-pane .viewport {
+    -fx-background-color: transparent !important;
+}
+
+.note-item-textarea .content {
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-background-radius: 0 !important;
