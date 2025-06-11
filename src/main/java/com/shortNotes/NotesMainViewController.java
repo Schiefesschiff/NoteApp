@@ -6,10 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+//interface NoteDeleteCallback {
+//    void onNoteDeleteRequested(NotesMainViewController.NoteData noteFile);
+//}
 
 public class NotesMainViewController
 {
@@ -18,9 +22,11 @@ public class NotesMainViewController
     @FXML
     private GridPane notesMainView;
 
-
     private double gap = 10;
     private double actualNoteWidth = 100; // Fallback
+
+    private static final ArrayList<NoteData> noteSaves = new ArrayList<>();
+
 
     public void initialize()
     {
@@ -29,7 +35,7 @@ public class NotesMainViewController
             notesMainView.getScene().widthProperty().addListener((obs, oldWidth, newWidth) ->
             {
                 setAllNotePositions();
-              //  System.out.println("width: " + newWidth);
+                //  System.out.println("width: " + newWidth);
             });
         });
     }
@@ -39,13 +45,21 @@ public class NotesMainViewController
         try
         {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("NoteItem.fxml"));
-            VBox noteBox = loader.load();
+            StackPane noteBox = loader.load();
             NoteItemController noteItemController = loader.getController();
-            noteItemController.setData(note);
 
             notesMainView.add(noteBox, 0, 0);
             NoteCounter++;
-            setAllNotePositions();
+
+            var noteData = new NoteData(noteBox, noteItemController, note);
+            noteSaves.add(noteData);
+            noteItemController.setData(noteData, this);
+
+            Platform.runLater(() ->
+            {
+                setAllNotePositions();
+            });
+
 
         } catch (IOException e)
         {
@@ -55,14 +69,20 @@ public class NotesMainViewController
 
     public void addNote()
     {
-        var temp = new NoteSave(SaveManager.NOTE_DEFAULT_WINDOW, "New Note", "Number " + (NoteCounter+1));
+        var temp = new NoteSave(SaveManager.NOTE_DEFAULT_WINDOW, "New Note");
 
         addNote(temp);
     }
 
-    public void removeNote()
+    public void removeNote(NoteData noteData)
     {
-
+        Node noteView = noteData.box;
+        if (noteView != null)
+        {
+            notesMainView.getChildren().remove(noteView);
+        }
+        noteSaves.remove(noteData);
+        setAllNotePositions();
     }
 
     private void setAllNotePositions()
@@ -85,7 +105,7 @@ public class NotesMainViewController
             actualNoteWidth = firstNote.getBoundsInParent().getWidth();
         }
 
-        MathHelper.GridPosition cc = MathHelper.calculateGridPosition(noteIndex, actualNoteWidth, gap, notesMainView.getScene().getWidth());
+        HelperFunctions.GridPosition cc = HelperFunctions.calculateGridPosition(noteIndex, actualNoteWidth, gap, notesMainView.getScene().getWidth());
         GridPane.setColumnIndex(note, cc.column);
         GridPane.setRowIndex(note, cc.row);
     }
@@ -96,5 +116,44 @@ public class NotesMainViewController
         addNote();
     }
 
+    public ArrayList<NoteData> getNoteData()
+    {
+        return noteSaves;
+    }
+
+
+    public static class NoteData
+    {
+        final StackPane box;
+        final NoteItemController controller;
+        private NoteSave noteSave;
+
+        NoteData(StackPane box, NoteItemController controller, NoteSave NoteSave)
+        {
+            this.box = box;
+            this.controller = controller;
+            this.noteSave = NoteSave;
+        }
+
+        public NoteSave getNoteSave()
+        {
+            return noteSave;
+        }
+
+        public void setText(String text)
+        {
+            this.noteSave = new NoteSave(noteSave.windowConfig(), text);
+        }
+
+        public String getText()
+        {
+            return noteSave.content();
+        }
+
+        public void setWindowsSize(int Width, int Height)
+        {
+            this.noteSave = new NoteSave(new WindowConfig(Width, Height, 0, 0, false), noteSave.content());
+        }
+    }
 
 }

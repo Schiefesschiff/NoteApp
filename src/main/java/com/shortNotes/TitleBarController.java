@@ -4,11 +4,17 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class TitleBarController
 {
     public NotesMainViewController notesMainViewController;
+    private MainViewController mainViewController;
+
+    @FXML
+    private Button closeButton;
 
     public void setNotesMainViewController(NotesMainViewController notesMainViewController)
     {
@@ -23,9 +29,12 @@ public class TitleBarController
     }
 
     @FXML
-    private void onCloseClicked()
+    private void onCloseClicked(ActionEvent event)
     {
-        Platform.exit();
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+
+        stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+        event.consume();
     }
 
     @FXML
@@ -35,6 +44,7 @@ public class TitleBarController
         Stage stage = (Stage) source.getScene().getWindow();
 
         stage.setIconified(true);
+
     }
 
 }

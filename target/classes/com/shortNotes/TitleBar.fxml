@@ -20,7 +20,7 @@
 
     <Pane HBox.hgrow="ALWAYS"/>
     <Button text="_" onAction="#onMinimizeClicked" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
-    <Button text="X" onAction="#onCloseClicked" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
+    <Button fx:id="closeButton" text="X" onAction="#onCloseClicked" style="-fx-background-color: transparent; -fx-text-fill: white;"/>
 
 
 </HBox>

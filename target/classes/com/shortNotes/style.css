@@ -44,3 +44,11 @@
 .scroll-pane .viewport {
     -fx-padding: 0;
 }
+
+.note-item-delete-button {
+    -fx-background-color: transparent; /* Macht den Hintergrund transparent */
+    -fx-background-insets: 0;          /* Entfernt jegliche Einrückungen für den Hintergrund */
+    -fx-background-radius: 0;          /* Entfernt abgerundete Ecken */
+    -fx-padding: 0;                    /* Entfernt jegliche Polsterung um den Button-Inhalt */
+    -fx-border-color: transparent;
+}

@@ -12,7 +12,6 @@ record WindowConfig(
 
 record NoteSave(
         WindowConfig windowConfig,
-        String title,
         String content
 )
 {

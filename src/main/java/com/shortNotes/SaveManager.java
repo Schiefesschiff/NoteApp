@@ -13,41 +13,13 @@ public class SaveManager
 {
     private final String CONFIG_FILE_NAME = "config.json";
 
-    private final WindowConfig mainDefaultWindow;
+    public final WindowConfig mainDefaultWindow;
     public static  final WindowConfig NOTE_DEFAULT_WINDOW = new WindowConfig(200, 200, -1, -1, false);
 
-
-    private final String jsonArrayString;
 
     public SaveManager()
     {
         this.mainDefaultWindow = new WindowConfig(300, 500, -1, -1, false);
-
-        jsonArrayString = """
-                [
-                  {
-                    "width": 300.0,
-                    "height": 500.0,
-                    "x": -1.0,
-                    "y": -1.0,
-                    "maximized": false
-                  },
-                  {
-                    "width": 200.0,
-                    "height": 200.0,
-                    "x": -1.0,
-                    "y": -1.0,
-                    "maximized": false
-                  },
-                  {
-                    "width": 800.0,
-                    "height": 600.0,
-                    "x": 100.0,
-                    "y": 50.0,
-                    "maximized": true
-                  }
-                ]
-                """;
     }
 
     public SaveData LoadData()

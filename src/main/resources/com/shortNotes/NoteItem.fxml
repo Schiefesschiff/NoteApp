@@ -6,10 +6,30 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:id="noteBox"
-      fx:controller="com.shortNotes.NoteItemController"
-      styleClass="note-box"
-      VBox.vgrow="ALWAYS">
-    <TextArea fx:id="contentLabel" text="Dies ist eine Notiz" styleClass="note-item-textarea"/>
-</VBox>
+<?import javafx.geometry.Insets?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:id="noteBox"
+           fx:controller="com.shortNotes.NoteItemController"
+           styleClass="note-box"
+           VBox.vgrow="ALWAYS">
+
+    <!-- TextArea als Hintergrund -->
+    <TextArea fx:id="contentLabel"
+              text="Dies ist eine Notiz"
+              styleClass="note-item-textarea"/>
+
+    <!-- Button schwebt oben rechts über der TextArea -->
+    <Button fx:id="deleteButton"
+            styleClass="note-item-delete-button"
+            onAction="#deleteNote"
+            StackPane.alignment="TOP_RIGHT">
+        <StackPane.margin>
+            <Insets top="0.10" right="0.10"/>
+        </StackPane.margin>
+        <graphic>
+            <FontIcon iconLiteral="fas-trash-alt" iconColor="red" iconSize="10"/>
+        </graphic>
+    </Button>
+</StackPane>

@@ -1,6 +1,7 @@
 package com.shortNotes;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,16 +24,12 @@ public class NotizenApplication extends Application
         stage.setTitle("Notizen");
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setMinWidth(150);
-        stage.setMinHeight(200);
-
-        new WindowsResizer(stage, scene);
-
         stage.show();
 
-   //     var test = new SaveManager();
-   //     test.SaveConfigs();
-   //     var temp = test.Load();
+        new WindowsResizer(stage, scene);
+        MainViewController mainViewController = fxmlLoader.getController();
+        mainViewController.setStage(stage);
+        mainViewController.start();
 
     }
 
