@@ -42,6 +42,11 @@ public class MainViewController
         stage.setMinWidth(100);
         stage.setMinHeight(100);
 
+        stage.setX(saveData.mainWindow.x());
+        stage.setY(saveData.mainWindow.y());
+
+        stage.setMaximized(saveData.mainWindow.maximized());
+
         stage.setWidth(saveData.mainWindow.width());
         stage.setHeight(saveData.mainWindow.height());
 
@@ -55,9 +60,11 @@ public class MainViewController
     {
         var noteData = notesMainViewController.getNoteData();
         var noteSaves = HelperFunctions.NoteDataToNoteSaves(noteData);
-
-        var savedata = new SaveData(new WindowConfig(stage.getWidth(), stage.getHeight(), -1, -1, false),noteSaves );
+        var WinDa = new WindowConfig(stage.getWidth(), stage.getHeight(), stage.getX(), stage.getY(), stage.isMaximized());
+        var savedata = new SaveData(WinDa, noteSaves);
         saveManager.SaveData(savedata);
+
+
     }
 
 }

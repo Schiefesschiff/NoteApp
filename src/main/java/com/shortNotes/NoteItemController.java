@@ -33,6 +33,18 @@ public class NoteItemController
                 }
             }
         });
+
+        contentLabel.setOnMouseClicked(event ->
+        {
+            if (event.getClickCount() == 1)
+            {
+
+            } else if (event.getClickCount() == 2)
+            {
+
+            }
+        });
+
     }
 
 
