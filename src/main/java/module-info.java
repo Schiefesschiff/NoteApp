@@ -1,4 +1,4 @@
-module com.shortNotes.notizen {
+module com.shortNotes {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -7,6 +7,6 @@ module com.shortNotes.notizen {
     requires org.kordamp.bootstrapfx.core;
     requires com.google.gson;
 
-    opens com.shortNotes to javafx.fxml, com.google.gson;
     exports com.shortNotes;
+    opens com.shortNotes to javafx.fxml, com.google.gson;
 }

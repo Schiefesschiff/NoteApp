@@ -1,6 +1,6 @@
 package com.shortNotes;
 
-record WindowConfig(
+public record WindowConfig(
         double width,
         double height,
         double x,
@@ -10,9 +10,3 @@ record WindowConfig(
 {
 }
 
-record NoteSave(
-        WindowConfig windowConfig,
-        String content
-)
-{
-}
