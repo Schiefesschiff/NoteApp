@@ -1,9 +1,9 @@
 {
   "mainWindow": {
-    "width": 150.6666717529297,
-    "height": 485.3333435058594,
-    "x": 1996.6666259765625,
-    "y": 190.0,
+    "width": 150.0,
+    "height": 500.0,
+    "x": 1246.800048828125,
+    "y": 69.5999984741211,
     "maximized": false
   },
   "NotesSaves": [
@@ -15,7 +15,7 @@
         "y": -1.0,
         "maximized": false
       },
-      "content": "222222222222222222222222222222222222221111111"
+      "content": "New Note"
     },
     {
       "windowConfig": {
@@ -25,7 +25,7 @@
         "y": -1.0,
         "maximized": false
       },
-      "content": "Number 9"
+      "content": "New Note"
     },
     {
       "windowConfig": {
@@ -35,7 +35,17 @@
         "y": -1.0,
         "maximized": false
       },
-      "content": "Number 10"
+      "content": "New Note"
+    },
+    {
+      "windowConfig": {
+        "width": 200.0,
+        "height": 200.0,
+        "x": -1.0,
+        "y": -1.0,
+        "maximized": false
+      },
+      "content": "New Note"
     }
   ]
 }

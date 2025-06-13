@@ -38,17 +38,22 @@ public class MainViewController
 
         saveManager = new SaveManager();
         var saveData = saveManager.LoadData();
+        for (var noteSave : saveData.NotesSaves)
+        {
+            noteSave.init();
+        }
+
 
         stage.setMinWidth(100);
         stage.setMinHeight(100);
 
-        stage.setX(saveData.mainWindow.x());
-        stage.setY(saveData.mainWindow.y());
+        stage.setX(saveData.mainWindow.x);
+        stage.setY(saveData.mainWindow.y);
 
-        stage.setMaximized(saveData.mainWindow.maximized());
+        stage.setMaximized(saveData.mainWindow.maximized);
 
-        stage.setWidth(saveData.mainWindow.width());
-        stage.setHeight(saveData.mainWindow.height());
+        stage.setWidth(saveData.mainWindow.width);
+        stage.setHeight(saveData.mainWindow.height);
 
         for (var noteSave : saveData.NotesSaves)
         {

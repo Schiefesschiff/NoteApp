@@ -9,14 +9,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class NoteItemController
+public class NoteItemController implements TextChangeListener
 {
     @FXML
     public TextArea contentLabel;
@@ -60,8 +58,15 @@ public class NoteItemController
     public void setData(NotesMainViewController.NoteData noteData, NotesMainViewController notesMainViewController)
     {
         this.currentNoteSave = noteData;
+        currentNoteSave.getNoteSave().addTextChangeListener(this);
+
         this.notesMainViewController = notesMainViewController;
-        contentLabel.setText(currentNoteSave.getText());
+        setTextInTextArea(currentNoteSave.getText());
+    }
+
+    private void setTextInTextArea(String text)
+    {
+        contentLabel.setText(text);
     }
 
     private void setTextInSaveNote(String text)
@@ -71,6 +76,7 @@ public class NoteItemController
 
     private void OpenWindows()
     {
+        if (isOpen)return;
         isOpen = true;
         try
         {
@@ -86,6 +92,8 @@ public class NoteItemController
             newStage.initStyle(StageStyle.UNDECORATED);
             newStage.show();
 
+            controller.setData(newStage, newScene, currentNoteSave);
+
             new WindowsResizer(newStage, newScene);
 
         } catch (IOException e)
@@ -97,7 +105,14 @@ public class NoteItemController
     @FXML
     public void deleteNote(ActionEvent actionEvent)
     {
+        currentNoteSave.getNoteSave().removeTextChangeListener(this);
         notesMainViewController.removeNote(currentNoteSave);
+    }
+
+    @Override
+    public void onTextChanged(String newText)
+    {
+        setTextInTextArea(newText);
     }
 }
 

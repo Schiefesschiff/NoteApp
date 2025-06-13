@@ -69,7 +69,7 @@ public class NotesMainViewController
 
     public void addNote()
     {
-        var temp = new NoteSave(SaveManager.NOTE_DEFAULT_WINDOW, "New Note");
+        var temp = new NoteSave(SaveManager.NOTE_DEFAULT_WINDOW, "New Note", false);
 
         addNote(temp);
     }
@@ -140,19 +140,21 @@ public class NotesMainViewController
             return noteSave;
         }
 
+        public void setNoteSave(WindowConfig windowConfig,String content, boolean isOpen)
+        {
+            this.noteSave.setWindowConfig(windowConfig);
+            this.noteSave.setContent(content);
+            this.noteSave.setOpen(isOpen);
+        }
+
         public void setText(String text)
         {
-            this.noteSave = new NoteSave(noteSave.windowConfig(), text);
+            noteSave.setContent(text);
         }
 
         public String getText()
         {
-            return noteSave.content();
-        }
-
-        public void setWindowsSize(int Width, int Height)
-        {
-            this.noteSave = new NoteSave(new WindowConfig(Width, Height, 0, 0, false), noteSave.content());
+            return noteSave.getContent();
         }
     }
 
