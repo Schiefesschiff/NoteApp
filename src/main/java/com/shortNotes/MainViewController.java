@@ -43,7 +43,6 @@ public class MainViewController
             noteSave.init();
         }
 
-
         stage.setMinWidth(100);
         stage.setMinHeight(100);
 
@@ -63,6 +62,7 @@ public class MainViewController
 
     public void onAppClose()
     {
+        notesMainViewController.MainViewIsClosing();
         var noteData = notesMainViewController.getNoteData();
         var noteSaves = HelperFunctions.NoteDataToNoteSaves(noteData);
         var WinDa = new WindowConfig(stage.getWidth(), stage.getHeight(), stage.getX(), stage.getY(), stage.isMaximized());

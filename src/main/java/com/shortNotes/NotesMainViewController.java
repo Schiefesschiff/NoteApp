@@ -11,14 +11,9 @@ import javafx.scene.layout.StackPane;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//interface NoteDeleteCallback {
-//    void onNoteDeleteRequested(NotesMainViewController.NoteData noteFile);
-//}
 
 public class NotesMainViewController
 {
-    private int NoteCounter;
-
     @FXML
     private GridPane notesMainView;
 
@@ -49,7 +44,6 @@ public class NotesMainViewController
             NoteItemController noteItemController = loader.getController();
 
             notesMainView.add(noteBox, 0, 0);
-            NoteCounter++;
 
             var noteData = new NoteData(noteBox, noteItemController, note);
             noteSaves.add(noteData);
@@ -111,7 +105,7 @@ public class NotesMainViewController
     }
 
     @FXML
-    protected void onNewNoteButtonClick()
+    private void onNewNoteButtonClick()
     {
         addNote();
     }
@@ -121,17 +115,25 @@ public class NotesMainViewController
         return noteSaves;
     }
 
+    public void MainViewIsClosing()
+    {
+        for (NoteData noteData : noteSaves)
+        {
+            noteData.noteItemController.MainViewIsClosing();
+        }
+    }
 
     public static class NoteData
     {
         final StackPane box;
-        final NoteItemController controller;
-        private NoteSave noteSave;
+        final NoteItemController noteItemController;
+        private BigNoteWindow bigNoteWindowController;
+        private final NoteSave noteSave;
 
         NoteData(StackPane box, NoteItemController controller, NoteSave NoteSave)
         {
             this.box = box;
-            this.controller = controller;
+            this.noteItemController = controller;
             this.noteSave = NoteSave;
         }
 
@@ -140,7 +142,7 @@ public class NotesMainViewController
             return noteSave;
         }
 
-        public void setNoteSave(WindowConfig windowConfig,String content, boolean isOpen)
+        public void setNoteSave(WindowConfig windowConfig, String content, boolean isOpen)
         {
             this.noteSave.setWindowConfig(windowConfig);
             this.noteSave.setContent(content);
@@ -155,6 +157,16 @@ public class NotesMainViewController
         public String getText()
         {
             return noteSave.getContent();
+        }
+
+        public BigNoteWindow getBigNoteWindowController()
+        {
+            return bigNoteWindowController;
+        }
+
+        public void setBigNoteWindowController(BigNoteWindow bigNoteWindowController)
+        {
+            this.bigNoteWindowController = bigNoteWindowController;
         }
     }
 

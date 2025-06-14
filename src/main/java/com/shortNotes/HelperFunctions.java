@@ -37,4 +37,11 @@ public class HelperFunctions
         }
         return noteSaves;
     }
+
+    public static void getMiddlePointFromScreen()
+    {
+        // return the middle point of the screen
+        return;
+    }
+
 }

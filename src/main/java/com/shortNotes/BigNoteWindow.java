@@ -21,10 +21,13 @@ public class BigNoteWindow
     @FXML
     private void handleCloseButton(ActionEvent event)
     {
-//        bigContentTextArea.requestFocus();
+        CloseWindow();
+    }
 
+    public void CloseWindow()
+    {
         SaveData();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentNoteSave.setBigNoteWindowController(null);
         stage.close();
     }
 
@@ -43,13 +46,6 @@ public class BigNoteWindow
 
         stage.setWidth(currentNoteSave.getNoteSave().getWindowConfig().width);
         stage.setHeight(currentNoteSave.getNoteSave().getWindowConfig().height);
-
-        WindowEvent closeEvent = new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST);
-        stage.fireEvent(closeEvent);
-        if (!closeEvent.isConsumed())
-        {
-            currentNoteSave.getNoteSave().setOpen(false);
-        }
 
     }
 

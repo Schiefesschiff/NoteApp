@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,13 +17,9 @@ public class NoteItemController implements TextChangeListener
 {
     @FXML
     public TextArea contentLabel;
-    @FXML
-    public Button closeButton;
 
     private NotesMainViewController notesMainViewController;
     private NotesMainViewController.NoteData currentNoteSave;
-
-    private boolean isOpen = false;
 
     @FXML
     public void initialize()
@@ -76,8 +71,8 @@ public class NoteItemController implements TextChangeListener
 
     private void OpenWindows()
     {
-        if (isOpen)return;
-        isOpen = true;
+        if (currentNoteSave.getNoteSave().isOpen())return;
+        currentNoteSave.getNoteSave().setOpen(true);
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("BigNoteWindow.fxml"));
@@ -93,6 +88,7 @@ public class NoteItemController implements TextChangeListener
             newStage.show();
 
             controller.setData(newStage, newScene, currentNoteSave);
+            currentNoteSave.setBigNoteWindowController(controller);
 
             new WindowsResizer(newStage, newScene);
 
@@ -100,6 +96,13 @@ public class NoteItemController implements TextChangeListener
         {
             e.printStackTrace();
         }
+    }
+
+    public void MainViewIsClosing()
+    {
+        if (!currentNoteSave.getNoteSave().isOpen())return;
+
+        currentNoteSave.getBigNoteWindowController().CloseWindow();
     }
 
     @FXML
