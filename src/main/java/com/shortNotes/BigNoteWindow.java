@@ -2,16 +2,15 @@ package com.shortNotes;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import org.fxmisc.richtext.StyledTextArea;
 
 public class BigNoteWindow
 {
     @FXML
-    public TextArea bigContentTextArea;
+    public StyledTextArea bigContentTextArea;
 
     private Stage stage;
     private Scene scene;
@@ -37,7 +36,7 @@ public class BigNoteWindow
         this.scene = scene;
 
         this.currentNoteSave = noteData;
-        bigContentTextArea.setText(currentNoteSave.getText());
+     //   bigContentTextArea.setText(currentNoteSave.getText());
 
         stage.setX(currentNoteSave.getNoteSave().getWindowConfig().x);
         stage.setY(currentNoteSave.getNoteSave().getWindowConfig().y);
