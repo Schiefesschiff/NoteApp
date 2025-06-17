@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class NotizenApplication extends Application
 {
+    // Function executed by JavaFX Framework, to start the UI
     @Override
     public void start(Stage stage) throws IOException
     {
@@ -25,6 +26,7 @@ public class NotizenApplication extends Application
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 
+        // passes the window class to make the window movable and scalable
         new WindowsResizer(stage, scene);
         MainViewController mainViewController = fxmlLoader.getController();
         mainViewController.setStage(stage);

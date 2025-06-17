@@ -6,11 +6,18 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+
+/**
+ * This class enables resizing and dragging of a JavaFX window.
+ * It attaches mouse listeners to the scene to detect interactions
+ * at the window's edges for resizing or anywhere else for dragging.
+ */
 public class WindowsResizer
 {
     private final Stage stage;
     private final Scene scene;
 
+    // Variables to store initial mouse and stage positions/dimensions for calculations during drag/resize.
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -19,6 +26,7 @@ public class WindowsResizer
     private double initialStageWidth;
     private double initialStageHeight;
 
+    // The pixel width around the window edges that triggers a resize.
     private final double RESIZE_MARGIN = 5;
 
     private ResizeMode currentMode = ResizeMode.NONE;
@@ -26,11 +34,20 @@ public class WindowsResizer
     private double minWidth = 150;
     private double minHeight = 200;
 
+    /**
+     * Defines the different modes of interaction: no action, or resizing from various directions.
+     */
     private enum ResizeMode
     {
         NONE, NORTH, SOUTH, EAST, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST
     }
 
+    /**
+     * Constructor: Initializes the resizer with the target stage and scene, then sets up event listeners.
+     *
+     * @param stage The JavaFX Stage to apply resize/drag functionality to.
+     * @param scene The JavaFX Scene that captures mouse events for the stage.
+     */
     public WindowsResizer(Stage stage, Scene scene)
     {
         this.stage = stage;
@@ -38,10 +55,15 @@ public class WindowsResizer
         attachListeners();
     }
 
+    /**
+     * Attaches all necessary mouse event handlers to the scene.
+     * This includes handling mouse press, drag, move, and release events.
+     */
     private void attachListeners()
     {
         scene.setOnMousePressed(new EventHandler<MouseEvent>()
         {
+            // When the mouse is pressed:
             @Override
             public void handle(MouseEvent event)
             {
@@ -59,6 +81,7 @@ public class WindowsResizer
             }
         });
 
+        // When the mouse is dragged:
         scene.setOnMouseDragged(new EventHandler<MouseEvent>()
         {
             @Override
@@ -71,6 +94,9 @@ public class WindowsResizer
                     stage.setY(event.getScreenY() - yOffset);
                 } else
                 {
+                    // If in a resize mode, calculate and apply new dimensions and position
+                    // based on the initial stage state, mouse movement, and the resize mode.
+                    // It also ensures the window doesn't shrink below `minWidth` or `minHeight`.
                     double newWidth = initialStageWidth;
                     double newHeight = initialStageHeight;
                     double newX = initialStageX;
@@ -131,6 +157,7 @@ public class WindowsResizer
                             break;
                     }
 
+                    // Apply the calculated changes to the stage.
                     stage.setX(newX);
                     stage.setY(newY);
                     stage.setWidth(newWidth);
@@ -139,8 +166,10 @@ public class WindowsResizer
             }
         });
 
+        // When the mouse moves (without being pressed):
         scene.setOnMouseMoved(new EventHandler<MouseEvent>()
         {
+            // Change the cursor to indicate if resizing is possible from the current mouse position.
             @Override
             public void handle(MouseEvent event)
             {
@@ -170,6 +199,7 @@ public class WindowsResizer
             }
         });
 
+        // When the mouse button is released:
         scene.setOnMouseReleased(new EventHandler<MouseEvent>()
         {
             @Override
@@ -181,6 +211,13 @@ public class WindowsResizer
         });
     }
 
+    /**
+     * Determines the current resize mode based on the mouse's `x` and `y` coordinates within the scene.
+     * It checks if the mouse is within the `RESIZE_MARGIN` from any of the window's edges.
+     * @param x The mouse's X-coordinate within the scene.
+     * @param y The mouse's Y-coordinate within the scene.
+     * @return The `ResizeMode` corresponding to the detected edge(s), or `NONE` if no edge is hit.
+     */
     private ResizeMode getResizeMode(double x, double y)
     {
         boolean north = y < RESIZE_MARGIN;

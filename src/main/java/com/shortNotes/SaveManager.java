@@ -8,7 +8,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Manages the loading and saving of application data (notes and window configurations)
+ * to and from a JSON file. It uses the Gson library for serialization and deserialization.
+ */
 public class SaveManager
 {
     private final String CONFIG_FILE_NAME = "config.json";
@@ -16,12 +19,20 @@ public class SaveManager
     public final WindowConfig mainDefaultWindow;
     public static  final WindowConfig NOTE_DEFAULT_WINDOW = new WindowConfig(200, 200, -1, -1, false);
 
-
+    /**
+     * Constructor initializes the default configuration for the main window.
+     */
     public SaveManager()
     {
         this.mainDefaultWindow = new WindowConfig(300, 500, -1, -1, false);
     }
 
+    /**
+     * Loads the application data from the `config.json` file.
+     * If the file is not found or an error occurs during loading,
+     * it returns a `SaveData` object with default configurations.
+     * @return A `SaveData` object containing the loaded data or default values.
+     */
     public SaveData LoadData()
     {
         Gson gson = new Gson();
@@ -43,6 +54,11 @@ public class SaveManager
         }
     }
 
+    /**
+     * Saves the provided `SaveData` object to the `config.json` file.
+     * The data is written in a human-readable, pretty-printed JSON format.
+     * @param saveData The `SaveData` object containing all application state to be saved.
+     */
     public void SaveData(SaveData saveData)
     {
         if (saveData == null)

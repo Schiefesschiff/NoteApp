@@ -3,6 +3,11 @@ package com.shortNotes;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
+/**
+ * The MainViewController acts as the central controller for the shortNotes application's main window.
+ * It coordinates interactions between the UI components (TitleBar, ScrollBar, NotesMainView),
+ * manages the application's lifecycle events like startup and shutdown, and handles saving/loading application state.
+ */
 public class MainViewController
 {
     @FXML
@@ -14,6 +19,11 @@ public class MainViewController
     private Stage stage;
     private SaveManager saveManager;
 
+    /**
+     * Initializes the controller after its FXML elements have been loaded.
+     * This method is automatically called by JavaFX.
+     * It connects the NotesMainViewController to other UI components that need to interact with it.
+     */
     @FXML
     public void initialize()
     {
@@ -24,11 +34,17 @@ public class MainViewController
         }
     }
 
+    // Sets the primary stage (window) for this controller.
     public void setStage(Stage stage)
     {
         this.stage = stage;
     }
 
+    /**
+     * Starts the main application logic once the stage is ready.
+     * This method handles loading saved data (window state and notes) and setting up
+     * the application's initial display.
+     */
     public void start()
     {
         stage.setOnCloseRequest(event ->
@@ -60,6 +76,10 @@ public class MainViewController
         }
     }
 
+    /**
+     * This method is called when the application is about to close (e.g., user clicks the close button).
+     * It ensures all current notes and the main window's state are saved before termination.
+     */
     public void onAppClose()
     {
         notesMainViewController.MainViewIsClosing();
